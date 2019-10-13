@@ -16,27 +16,20 @@
 
 package org.springframework.beans.factory.xml;
 
-import java.beans.PropertyEditorSupport;
-import java.util.StringTokenizer;
-
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanIsNotAFactoryException;
-import org.springframework.beans.factory.BeanNotOfRequiredTypeException;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.tests.sample.beans.LifecycleBean;
 import org.springframework.tests.sample.beans.MustBeInitialized;
 import org.springframework.tests.sample.beans.TestBean;
 import org.springframework.tests.sample.beans.factory.DummyFactory;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import java.beans.PropertyEditorSupport;
+import java.util.StringTokenizer;
+
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * Subclasses must initialize the bean factory and any other variables they need.
@@ -204,6 +197,10 @@ public abstract class AbstractBeanFactoryTests {
 		assertThat(dad.getName().equals("Albert")).as("Dad has correct name").isTrue();
 	}
 
+	/**
+	 * 单例测试类
+	 * @throws Exception
+	 */
 	@Test
 	public void factorySingleton() throws Exception {
 		assertThat(getBeanFactory().isSingleton("&singletonFactory")).isTrue();
